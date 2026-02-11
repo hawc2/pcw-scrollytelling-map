@@ -558,7 +558,8 @@
             doubleClickZoom: false,
             scrollZoom: false,
             touchZoomRotate: false,
-            maplibreLogo: true
+            maplibreLogo: false,
+            attributionControl: false
         });
 
         // Create an inset map if enabled in config.js
@@ -589,16 +590,6 @@
         var scroller = scrollama();
 
         map.on("load", function () {
-            if (config.use3dTerrain) {
-                map.addSource('terrainSource', {
-                    'type': 'raster-dem',
-                    'url': 'map/terrain-tiles/tiles.json',
-                    tileSize: 256
-                });
-
-                map.setTerrain({ 'source': 'terrainSource', 'exaggeration': 1 });
-            };
-
             // add custom layers
             if (config.useCustomLayers) {
                 for (i = 0; i < externalData.sources.length; i++) {
