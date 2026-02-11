@@ -162,12 +162,12 @@
 
         .step {
             padding-bottom: 50vh;
-            /* margin-bottom: 10vh; */
             opacity: 0.25;
+            transition: opacity 0.6s ease-in-out;
         }
 
         .step.active {
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .step div {
@@ -360,15 +360,6 @@
 
         // add navigation control for interactive chapters
         const navigation = new maplibregl.NavigationControl();
-
-        if (config.use3dTerrain) {
-            map.addControl(
-                new maplibregl.TerrainControl({
-                    source: 'terrainSource',
-                    exaggeration: 1
-                })
-            );
-        }
 
         // add custom hover popups for interactive chapters
         const popup = new maplibregl.Popup({
@@ -570,17 +561,22 @@
             maplibreLogo: true
         });
 
-        // Create a inset map if enabled in config.js
+        // Create an inset map if enabled in config.js
+        var insetMapReady = false;
+        var mainMapReady = false;
         if (config.inset && !config.legend) {
             var insetMap = new maplibregl.Map({
-                container: 'mapInset', // container id
-                style: config.style, //hosted style id
+                container: 'mapInset',
+                style: config.style,
                 center: config.chapters[0].location.center,
-                // Hardcode above center value if you want insetMap to be static.
-                zoom: 11, // starting zoom
+                zoom: 11,
                 hash: false,
                 interactive: false,
                 attributionControl: false,
+            });
+            insetMap.on('load', function () {
+                insetMapReady = true;
+                if (mainMapReady) getInsetBounds();
             });
         }
 
@@ -601,7 +597,7 @@
                 });
 
                 map.setTerrain({ 'source': 'terrainSource', 'exaggeration': 1 });
-            };            
+            };
 
             // add custom layers
             if (config.useCustomLayers) {
@@ -618,6 +614,8 @@
             // As the map moves, grab and update bounds in inset map.
             if (config.inset && !config.legend) {
                 map.on('move', getInsetBounds);
+                mainMapReady = true;
+                if (insetMapReady) getInsetBounds();
             }
 
             // setup the instance, pass callback functions
