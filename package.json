@@ -4,6 +4,7 @@
   "description": "A simple Node app to initialize a MapLibre Storymap server",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint build.js index.js config.js sources.js",
     "build": "browserify build.js -o ./dist/bundle.js",
     "serve": "node index.js"
   },
@@ -22,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/digidem/maplibre-storymap/issues"
   },
-  "homepage": "https://github.com/digidem/maplibre-storymap#readme"
+  "homepage": "https://github.com/digidem/maplibre-storymap#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.0"
+  }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 var config = {
     style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
     showMarkers: true,
