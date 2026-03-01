@@ -1,3 +1,5 @@
+# Note: this is an archived version of pcw-scrollytelling-map on Philly Community Wireless organization: https://github.com/phillycommunitywireless/pcw-scrollytelling-map
+
 # Philly Community Wireless Story Map (MapLibre)
 
 This repo is a MapLibre-based scrollytelling map for Philly Community Wireless.
